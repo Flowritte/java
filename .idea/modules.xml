@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/banco/banco.iml" filepath="$PROJECT_DIR$/banco/banco.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cajeros/cajeros.iml" filepath="$PROJECT_DIR$/cajeros/cajeros.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ejercicios.iml" filepath="$PROJECT_DIR$/.idea/ejercicios.iml" />
+      <module fileurl="file://$PROJECT_DIR$/generador/generador.iml" filepath="$PROJECT_DIR$/generador/generador.iml" />
+    </modules>
+  </component>
+</project>
