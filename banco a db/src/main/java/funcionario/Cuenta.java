@@ -1,6 +1,10 @@
 package funcionario;
+import bd.*;
 
-public class Cuenta {
+import java.sql.SQLException;
+import java.sql.SQLWarning;
+
+public class Cuenta extends Cliente{
     protected double saldo;
     private int agencia;
 
@@ -16,13 +20,26 @@ public class Cuenta {
     //cuenta vacia
     }
 
-    public Cuenta(int agencia)  {
+    public Cuenta(int agencia)  throws SQLException{
         no_cuenta cuenta_nueva = new no_cuenta();
+        conectar nueva_conexion = new conectar();
         //metodo de cracion de cuenta
         this.agencia = agencia;
         System.out.println("se ha creado una cuenta");
         System.out.println("El numero de cuenta es: " + cuenta_nueva.numero_cuenta);
+        try {
+            nueva_conexion.conecta();
+            nueva_conexion.insertar_cuenta(cuenta_nueva.numero_cuenta,getNombre(),getTelefono(),getNo_documento(),
+                    String.valueOf(getAgencia()),getSaldo());
+
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+            System.out.println("introduzca todo los datos por favor");
+        }
         Cuenta.total++;
+
     }
 
 
@@ -69,7 +86,7 @@ public class Cuenta {
         return titular;
     }
     public void setTitular(Cliente nombre){
-        this.titular = nombre;
+        this.titular = titular;
     }
     public static int getTotal(){
         //aumenta en 1 el nuemro de cuentas creadas

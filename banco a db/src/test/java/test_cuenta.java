@@ -1,17 +1,30 @@
 import funcionario.*;
+import  bd.conectar;
+
+import java.sql.SQLException;
+
 public class test_cuenta {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
-        Cliente clientediego = new Cliente();
-        clientediego.setNombre("diego rivera");
-        clientediego.setNo_documento("acta e ine");
 
-        Cuenta cuentadiego = new Cuenta(123);
-        cuentadiego.depocita(5600);
 
-        System.out.println(cuentadiego.getSaldo());
-        System.out.println(clientediego.getNombre()+" " + clientediego.getNo_documento());
+       // try {
+            conectar diego_conexion = new conectar();
+            diego_conexion.conecta();
+           /* diego_conexion.insertar_cuenta("1214","Diego rivera","5578981245",
+                    "Acta de Nacimiento","123",5600);
+            diego_conexion.cerra();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+
+        }
+*/
+       // System.out.println(cuentadiego.getSaldo());
+       // System.out.println(clientediego.getNombre()+" " + clientediego.getNo_documento());
+
+
+   }
 
 
     }
-}

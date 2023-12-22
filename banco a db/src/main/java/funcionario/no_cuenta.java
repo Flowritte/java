@@ -3,7 +3,7 @@ package funcionario;
 import java.util.Random;
 
 public class no_cuenta {
-    int longitud = 8;
+    int longitud = 4;
 
     String numero_cuenta = numero_cuenta_creado(longitud); //longitud de cuenta
 

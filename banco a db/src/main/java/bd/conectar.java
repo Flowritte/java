@@ -23,7 +23,7 @@ public class conectar {
     public void insertar_cuenta(String numero_cuenta_creado, String nombre, String telefono, String no_documento
     , String agencia,double saldo) throws SQLException {
 
-        String insert_cuenta = "INSERT INTO cuentas(id_cuenta,Nombre,telefono,No_documento,agencia,saldo) " +
+        String insert_cuenta = "INSERT INTO cuentas(id_cuenta,Nombre,telefono,No_documento,Agencia,Saldo) " +
                 "VALUES (?,?,?,?,?,?)";
         PreparedStatement st = conexion.prepareStatement(insert_cuenta);
         st.setString(1,numero_cuenta_creado);
@@ -41,7 +41,7 @@ public class conectar {
         String consuta = "SELECT id_cuenta,nombre,agencia,saldo from cuenta where id_cuenta = ?";
         PreparedStatement bd = conexion.prepareStatement(consuta);
         bd.setString(1,idcuenta);
-        //ResultSet set =
+        ResultSet set = bd.executeQuery(consuta);
 
 
     }

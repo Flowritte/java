@@ -4,7 +4,7 @@ public class cuenta_corriente extends Cuenta{
     public  cuenta_corriente(int agencia,String numero_cuenta_creado){
 
         //llama y recibe los numeros de cuenta
-        super(agencia);
+       // super(agencia);
     }
     @Override
     public void retira(double valor){
