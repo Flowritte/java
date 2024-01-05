@@ -1,9 +1,10 @@
 package funcionario;
 
 public class Cliente {
+    /*
     //atributos
     private String nombre;
-    private  String no_documento;
+    private  int no_documento;
     private String telefono;
 
     public String getNombre() {
@@ -14,12 +15,12 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public String getNo_documento() {
+    public int getNo_documento() {
         return no_documento;
 
     }
 
-    public void setNo_documento(String no_documento) {
+    public void setNo_documento(int no_documento) {
         this.no_documento = no_documento;
     }
 
@@ -30,6 +31,8 @@ public class Cliente {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+     */
 }
 
 

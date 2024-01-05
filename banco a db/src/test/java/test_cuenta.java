@@ -6,25 +6,17 @@ import java.sql.SQLException;
 public class test_cuenta {
     public static void main(String[] args) throws SQLException {
 
+       // Cuenta hector_cuenta = new Cuenta(001,"Hector Fanez",
+                         //   "5598945605",0001,100000);
 
+       // cuenta_ahorro hector_cc = new cuenta_ahorro("Alfonso wenster");
+        Cuenta hector = new Cuenta();
+        hector.getSaldo(8653);
+        //hector.transfiere();
 
-       // try {
-            conectar diego_conexion = new conectar();
-            diego_conexion.conecta();
-           /* diego_conexion.insertar_cuenta("1214","Diego rivera","5578981245",
-                    "Acta de Nacimiento","123",5600);
-            diego_conexion.cerra();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-
-        }
-*/
-       // System.out.println(cuentadiego.getSaldo());
-       // System.out.println(clientediego.getNombre()+" " + clientediego.getNo_documento());
 
 
    }
 
 
-    }
+}

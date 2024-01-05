@@ -2,36 +2,36 @@ package funcionario;
 import bd.*;
 
 import java.sql.SQLException;
-import java.sql.SQLWarning;
 
-public class Cuenta extends Cliente{
+public class Cuenta {
     protected double saldo;
     private int agencia;
+    private  String titular;
 
-
-    private Cliente titular = new Cliente();
     //contador de cuentas creadas
     private static int total;
 
-
-
     public Cuenta(){
-
     //cuenta vacia
     }
 
-    public Cuenta(int agencia)  throws SQLException{
+    public Cuenta(int agencia,String nombre,String telefono,int Documento
+                    ,double saldo)  throws SQLException{
+
+        //metodo de cracion de cuenta
+
         no_cuenta cuenta_nueva = new no_cuenta();
         conectar nueva_conexion = new conectar();
-        //metodo de cracion de cuenta
+
         this.agencia = agencia;
         System.out.println("se ha creado una cuenta");
         System.out.println("El numero de cuenta es: " + cuenta_nueva.numero_cuenta);
+
         try {
             nueva_conexion.conecta();
-            nueva_conexion.insertar_cuenta(cuenta_nueva.numero_cuenta,getNombre(),getTelefono(),getNo_documento(),
-                    String.valueOf(getAgencia()),getSaldo());
-
+            nueva_conexion.insertar_cuenta(cuenta_nueva.numero_cuenta,nombre,telefono,Documento,
+                    String.valueOf(agencia),saldo);
+            nueva_conexion.cerra();
 
         } catch (SQLException e) {
 
@@ -39,16 +39,15 @@ public class Cuenta extends Cliente{
             System.out.println("introduzca todo los datos por favor");
         }
         Cuenta.total++;
-
     }
 
 
-
-
-    public void depocita(double valor){
+   /* public void depocita(double valor){
         //metodo para depocitar
     this.saldo+=valor;
     }
+
+    */
     public void retira(double valor){
         //metodo para retiro en cuenta
         if (this.saldo >= valor){
@@ -58,20 +57,31 @@ public class Cuenta extends Cliente{
         }
     }
 
-    public boolean transfiere(double valor,Cuenta cuenta_destino){
+    public boolean transfiere(double valor, int cuenta_origen,int cuenta_destino) throws SQLException {
+
         //metodo para transerir
-        if (this.saldo >= valor){
-            this.retira(valor);
-            cuenta_destino.depocita(valor);
+        conectar consulta = new conectar();
+        double saldo_origen = consulta.consulta_saldo(cuenta_origen);
+        consulta.cerra();
+
+       if (valor <= saldo_origen){
+           conectar transferencia = new conectar();
+           transferencia.transacion(cuenta_origen,cuenta_destino,valor,saldo_origen);
+           transferencia.cerra();
+
+
             return true;
         }else {
             return false;
         }
+
+
     }
 
-    public double getSaldo(){
-        //metodo para obtener saldo
-        return saldo;
+    public void getSaldo(int id_cuenta) throws SQLException {
+        conectar consulta = new conectar();
+        consulta.consulta_saldo(id_cuenta);
+        consulta.cerra();
     }
     public  int getAgencia(){
         //metodo para obtener no de agencia
@@ -82,14 +92,17 @@ public class Cuenta extends Cliente{
         this.agencia = agencia;
     }
 
-    public Cliente getTitular(){
+    public String getTitular() {
         return titular;
     }
-    public void setTitular(Cliente nombre){
+
+    public void setTitular(String titular) {
         this.titular = titular;
     }
+
     public static int getTotal(){
         //aumenta en 1 el nuemro de cuentas creadas
+        System.out.println("Cuentas creadas: " + total);
         return total;
     }
 
