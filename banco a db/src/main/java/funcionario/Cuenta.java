@@ -8,8 +8,7 @@ public class Cuenta {
     private int agencia;
     private  String titular;
 
-    //contador de cuentas creadas
-    private static int total;
+       private static int total;
 
     public Cuenta(){
     //cuenta vacia
@@ -42,70 +41,98 @@ public class Cuenta {
     }
 
 
-   /* public void depocita(double valor){
-        //metodo para depocitar
-    this.saldo+=valor;
-    }
+   public void depocita(double valor,int id_cuenta) throws SQLException {
 
-    */
-    public void retira(double valor){
-        //metodo para retiro en cuenta
-        if (this.saldo >= valor){
-            this.saldo -= valor;
-        }else{
-            System.out.println("No cuentas con saldo suficiente");
+       double valor_total =0;
+       if(valor > 0){
+           try {
+               conectar consulta = new conectar();
+               consulta.conecta();
+               double saldo = consulta.consulta_saldo(id_cuenta);
+               valor_total = saldo +valor;
+               boolean tranfiere = consulta.consulta_inserta_depocita(id_cuenta,valor_total);
+               consulta.cerra();
+               if(tranfiere != false){
+
+                   conectar revision = new conectar();
+                   revision.conecta();
+                   revision.consulta_id(id_cuenta);
+                   System.out.println("El depocito se ha realizado con exito");
+                   revision.cerra();
+               }else {
+                   System.out.println("El depocito no se ha podido realizar con exito revise sus datos");
+               }
+           }catch (SQLException e){
+               e.printStackTrace(System.out);
+           }
+       }else {
+           System.out.println("Digite un valor superior a 0");
+       }
+
+   }
+
+
+    public void retira(double valor,int idcuenta) throws SQLException {
+
+        double valor_total = 0;
+        try {
+            conectar consulta = new conectar();
+            consulta.conecta();
+            double saldo = consulta.consulta_id(idcuenta);
+            if (valor <= saldo && valor > 0) {
+                valor_total = saldo - valor;
+                consulta.retira_saldo(valor_total, idcuenta);
+                consulta.consulta_saldo(idcuenta);
+                consulta.cerra();
+            }else {
+                System.out.println("No cuenta con suficiente saldo y verifique que el retiro sea mayor a 0");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
         }
     }
 
-    public boolean transfiere(double valor, int cuenta_origen,int cuenta_destino) throws SQLException {
+    public boolean transfiere(double valor_restado,int cuenta_origen,int cuenta_destino) throws SQLException {
 
-        //metodo para transerir
+        //consulta saldo
         conectar consulta = new conectar();
+        consulta.conecta();
         double saldo_origen = consulta.consulta_saldo(cuenta_origen);
-        consulta.cerra();
+        double valor_transfiere = valor_restado;
 
-       if (valor <= saldo_origen){
-           conectar transferencia = new conectar();
-           transferencia.transacion(cuenta_origen,cuenta_destino,valor,saldo_origen);
-           transferencia.cerra();
-
+        //metodo transaccion
+       if (valor_transfiere <= saldo_origen){
+            consulta.transacion(cuenta_origen,cuenta_destino,valor_transfiere,valor_restado);
+            consulta.cerra();
 
             return true;
         }else {
             return false;
         }
-
-
     }
 
     public void getSaldo(int id_cuenta) throws SQLException {
         conectar consulta = new conectar();
+        consulta.conecta();
         consulta.consulta_saldo(id_cuenta);
         consulta.cerra();
     }
-    public  int getAgencia(){
-        //metodo para obtener no de agencia
-        return agencia;
-    }
-    public void  setAgencia(int agencia){
-        //metodo para establecer agencia a cuenta
-        this.agencia = agencia;
-    }
 
-    public String getTitular() {
-        return titular;
-    }
+public void eliminar_cuenta (int id_cuenta) throws SQLException{
+    System.out.println("La cuenta a eliminar :");
+        conectar eliminar = new conectar();
+        eliminar.conecta();
+        eliminar.consulta(id_cuenta);
+        eliminar.eliminar(id_cuenta);
+        eliminar.cerra();
 
-    public void setTitular(String titular) {
-        this.titular = titular;
-    }
 
+}
     public static int getTotal(){
         //aumenta en 1 el nuemro de cuentas creadas
         System.out.println("Cuentas creadas: " + total);
         return total;
     }
-
 
 
 }
