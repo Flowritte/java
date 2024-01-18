@@ -71,7 +71,6 @@ public class Cuenta {
 
    }
 
-
     public void retira(double valor,int idcuenta) throws SQLException {
 
         double valor_total = 0;
