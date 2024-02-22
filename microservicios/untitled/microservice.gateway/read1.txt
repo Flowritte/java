@@ -1,0 +1,36 @@
+  para la creacion del servicio de gateway
+  para los metadatos es group: ruta
+  com.es.nombre_pryecto.nombre_servicio
+
+  artifact: nombre
+  nombre_pryecto.nombre_servicio
+
+  name:
+  nombre_microservicio
+
+  description:
+  descripcion del servicio
+
+  pakage name:
+  com.es.nombre_proyecto.nombre_servicio
+
+  para el gateway es:
+  com.es.microservice.gateway
+  microservice-gateway
+  microservice-gateway
+  microservicio del gateway
+  com.es.microservice.gateway
+
+
+  para este gateway que esla puerta de entrada y distribucion de los servicios se inica antes que los servicios
+  primero es config --> eureka -->gateway --> demas servicios
+
+    todo esto es en "sping initializr.io"
+   para el gateway se necesitan varias dependencias:
+   gateway
+   eureka discovery client
+   config client
+   srping boot actuator
+
+    posterior se crea el server eureka continuar en el read2.txt
+

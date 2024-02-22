@@ -1,0 +1,19 @@
+para el eureka es:
+  com.es.microservice.eureka
+  microservice-eureka
+  microservice-eureka
+  microservicio del eureka
+  com.es.microservice.eureka
+
+
+  para este eureka que es el servidor donde contendra y registra los microservicios a utilizar
+  primero es config --> eureka -->gateway --> demas servicios
+
+    todo esto es en "sping initializr.io"
+   para el eureka se necesitan varias dependencias:
+   eureka server
+   config client
+   spring boot actuator
+
+    se repiten los pasos para añadir el nuevo proyecto segun en el read del padre
+    posterior se crea el server config continuar en el read4.txt

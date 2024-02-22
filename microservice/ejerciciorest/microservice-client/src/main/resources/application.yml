@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: msvc-clientes
+  config: #config temporal server
+    import: optional:configserver:http://localhost:8888
+
+springdoc:
+  swagger-ui:

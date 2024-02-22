@@ -1,0 +1,13 @@
+server:
+  port: 8888
+
+spring:
+  profiles:
+    active: native #tipo de perfil de sping
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/Configurations #ruta de configuraciones
